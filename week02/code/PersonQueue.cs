@@ -13,6 +13,7 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
+        // Made this change. Person was being inserted at front of line, now they are being added to the end of the line
         _queue.Add(person);
     }
 
