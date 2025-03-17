@@ -46,14 +46,16 @@ public class PriorityQueueTests
     public void TestPriorityQueue_withAllNegative()
     {
         var priorityQueue = new PriorityQueue();
-        priorityQueue.Enqueue("Test 1", -1);
+        priorityQueue.Enqueue("Test 1", -100);
         priorityQueue.Enqueue("Test 2", -6);
         priorityQueue.Enqueue("Test 3", -10);
         priorityQueue.Enqueue("Test 4", -6);
+        priorityQueue.Enqueue("Test 5", -1);
+
         var A = priorityQueue.Dequeue();
-        Assert.AreEqual("Test 1", A);
+        Assert.AreEqual("Test 5", A);
     }
-    
+
     [TestMethod]
     public void TestPriorityQueue_EmptyQueue()
     {
