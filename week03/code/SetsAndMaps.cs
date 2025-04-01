@@ -59,6 +59,12 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            Console.WriteLine(fields[3]);
+            if (degrees.ContainsKey(fields[3])) {
+                degrees[fields[3]] += 1;
+            } else {
+                degrees[fields[3]] = 1;
+            }
         }
 
         return degrees;
@@ -83,7 +89,52 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        string normalized1 = new string(word1.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
+        string normalized2 = new string(word2.ToLower().Where(c => !char.IsWhiteSpace(c)).ToArray());
+
+
+        if (normalized1.Length != normalized2.Length) {
+            return false;
+        }
+        var word1_contents = new Dictionary<char, int>();
+        var word2_contents = new Dictionary<char, int>();
+
+        foreach (char c in normalized1) {
+            if (!char.IsWhiteSpace(c)) {
+                if (word1_contents.ContainsKey(c)) {
+                    word1_contents[c] += 1;
+                } else {
+                    word1_contents[c] = 1;
+                }
+            }
+        }
+
+        foreach (char c in normalized2) {
+            if (!char.IsWhiteSpace(c)) {
+                if (word2_contents.ContainsKey(c)) {
+                    word2_contents[c] += 1;
+                } else {
+                    word2_contents[c] = 1;
+                }
+            }            
+        }
+
+        bool is_valid = true;
+        foreach (var character in word1_contents) {
+            if (word2_contents.ContainsKey(character.Key)) {
+                if (word2_contents[character.Key] == character.Value) {
+                    continue;
+                }
+                else {
+                    is_valid = false;
+                }
+            } else {
+                is_valid = false;
+            }
+        }
+
+        return is_valid;
     }
 
     /// <summary>
