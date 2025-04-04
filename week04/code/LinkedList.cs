@@ -191,7 +191,6 @@ public class LinkedList : IEnumerable<int>
                     nextNode.Prev = newNode;
                     newNode.Next = nextNode;
                 }
-                return ; 
             }
             curr = curr.Next;
         }
@@ -225,7 +224,11 @@ public class LinkedList : IEnumerable<int>
     public IEnumerable Reverse()
     {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var curr = _tail;
+        while (curr is not null) {
+            yield return curr.Data;
+            curr = curr.Prev;
+        }
     }
 
     public override string ToString()
