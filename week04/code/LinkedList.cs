@@ -181,7 +181,15 @@ public class LinkedList : IEnumerable<int>
                     InsertTail(newValue);
                 }
                 else {
-                    
+                    var prevNode = curr.Prev!;
+                    var nextNode = curr.Next!;
+                    Node newNode = new(newValue);
+
+                    prevNode.Next = newNode;
+                    newNode.Prev = prevNode;
+
+                    nextNode.Prev = newNode;
+                    newNode.Next = nextNode;
                 }
                 return ; 
             }
