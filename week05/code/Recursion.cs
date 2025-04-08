@@ -47,13 +47,16 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
-        if (!results.Contains(word) && word.Length == size) {
-            results.Add(word);
-        }
-        if (size == 1) {
-            foreach (var letter in letters) {
-                results.Add($"{letter}");
+        if (word.Length == size) {
+            if (!results.Contains(word)) {
+                results.Add(word);
             }
+            return;
+        }
+
+        foreach( var letter in letters) {
+            string leftOvers = letters.Replace(letter.ToString(), "");
+            PermutationsChoose(results, leftOvers, size, word + letter);
         }
     }
 
