@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 
 public static class Recursion
 {
@@ -19,8 +20,8 @@ public static class Recursion
             return 0;
         }
         else {
-            var recursiveResult = (n ^ 2) + SumSquaresRecursive(n - 1);
-            return recursiveResult;
+            var result = (n * n) + SumSquaresRecursive(n - 1);
+            return result;
         }
     }
 
