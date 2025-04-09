@@ -171,19 +171,20 @@ public static class Recursion
 
         // TODO Start Problem 5
         // ADD CODE HERE
-        var newPath = new List<(int, int)>(currPath);
-
-        if (maze.IsValidMove(newPath, x, y)) {
-            newPath.Add((x, y));
-            if (maze.IsEnd(x, y)) {
-                results.Add(newPath.AsString());
-            } else {
-                SolveMaze(results, maze, x + 1, y, newPath);
-                SolveMaze(results, maze, x - 1, y, newPath);
-                SolveMaze(results, maze, x, y - 1, newPath);
-                SolveMaze(results, maze, x, y + 1, newPath);
-            }
+        if (!maze.IsValidMove(currPath, x, y)) {
+            return;
         }
+        currPath.Add((x, y));
+
+        if (maze.IsEnd(x, y)) {
+            results.Add(currPath.AsString());
+        } else {
+            SolveMaze(results, maze, x + 1, y, currPath);
+            SolveMaze(results, maze, x - 1, y, currPath);
+            SolveMaze(results, maze, x, y - 1, currPath);
+            SolveMaze(results, maze, x, y + 1, currPath);
+        }
+        currPath.RemoveAt(currPath.Count - 1);
 
     }
 }
