@@ -167,12 +167,23 @@ public static class Recursion
         if (currPath == null) {
             currPath = new List<ValueTuple<int, int>>();
         }
-        
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
         // ADD CODE HERE
+        var newPath = new List<(int, int)>(currPath);
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        if (maze.IsValidMove(newPath, x, y)) {
+            newPath.Add((x, y));
+            if (maze.IsEnd(x, y)) {
+                results.Add(newPath.AsString());
+            } else {
+                SolveMaze(results, maze, x + 1, y, newPath);
+                SolveMaze(results, maze, x - 1, y, newPath);
+                SolveMaze(results, maze, x, y - 1, newPath);
+                SolveMaze(results, maze, x, y + 1, newPath);
+            }
+        }
+
     }
 }
